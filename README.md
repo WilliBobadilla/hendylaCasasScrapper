@@ -40,6 +40,12 @@ virtualenv env
 source env/bin/activate
 ```
 
+\*\*\* En el caso de no contar con virtualenv
+
+```bash
+pip install virtualenv
+```
+
 <p>5. Instalar dependencias</p>
 
 ```bash
