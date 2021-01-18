@@ -58,7 +58,11 @@ pip install virtualenv
 cd env
 cd Scripts
 activate.bat
+cd ..
+cd ..
 ```
+
+Estos ultimos dos cd .. llevan de nuevo a la raiz del proyecto, en el caso de que esten usando windows hacer esto.
 
 <p>5. Instalar dependencias</p>
 
