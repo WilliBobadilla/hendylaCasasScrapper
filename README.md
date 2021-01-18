@@ -52,6 +52,14 @@ source env/bin/activate
 pip install virtualenv
 ```
 
+\*\* Para windows
+
+```bash
+cd env
+cd Scripts
+activate.bat
+```
+
 <p>5. Instalar dependencias</p>
 
 ```bash
