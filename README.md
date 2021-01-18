@@ -33,6 +33,12 @@ cd  hendylaCasasScrapper
 virtualenv env
 ```
 
+o si no funciona lo anterior
+
+```bash
+python -m virtualenv env
+```
+
 <p>4. Activar el virtual env</p> 
 ** Para linux
 
