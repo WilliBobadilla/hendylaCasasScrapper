@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<!-- Se utilizo una platilla de leaflet para crear un mapa en openstreet map con pines en las ubicaciones de las publicaciones,-->
+<!-- Aqui se hara el formateo de los popups-->
+
+<head>
+    <title>Mapa casas</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7/leaflet.css" />
+</head>
+<style>
+    #map {
+        width: 960px;
+        height: 500px;
+    }
+
+
+    .leaflet-popup-tip,
+    .leaflet-popup-content-wrapper {
+        background: #b4dbed;
+        color: #ffffff;
+    }
+
+    h1,
+    h2 {
+        font-family: Roboto;
+    }
+</style>
+
+
+
+<body id="cuerpo">
+    <div id="map" style="width: 1000px; height: 800px"></div>
+    <script src="https://d19vzq90twjlae.cloudfront.net/leaflet-0.7/leaflet.js">
+    </script>
+
+
+    <script>
+        var datos = JSON.parse('{{ datos| tojson | safe}}');
+        // datos es un json
+        var plano = new Array();
+        var index = 0; //para recorrer la lista
+        var lista_aux = new Array();
+
+
+        for (index = 0; index < datos.length; index++) {
+            //console.log(index);  
+            // console.log(lista_aux);
+            lista_aux = ["<h1>" + datos[index].descripcion + "</h1>" + "<h2>" + "Precio:" + datos[index].precio + "</h2>", datos[index].ubicacion.latitud, datos[index].ubicacion.longitud];
+            plano.push(lista_aux);// agregamos al array
+        }
+        console.log(plano);
+
+
+        var map = L.map('map').setView([-25.3058, -57.82082], 8);
+        mapLink =
+            '<a href="http://openstreetmap.org">OpenStreetMap</a>';
+        L.tileLayer(
+            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; ' + mapLink + ' Contributors',
+            maxZoom: 18,
+        }).addTo(map);
+        var mark;
+
+        var RedMarker = L.icon({
+            iconUrl: 'https://png2.cleanpng.com/sh/281ecea8a2c71f898ba1ebf7024cae19/L0KzQYm3VcI5N5DxR91yc4Pzfri0jfFxNZV3eelybnewgLr1TfNtcaEyeeR9LX3kgH70ggJsbaMyTdQ5YnO5SIftUvU6a2gzT6Q9Mke6QIe4VcI4PGo9S6k9OUm4PsH1h5==/kisspng-map-drawing-pin-clip-art-map-marker-5b0bc686f2e9c7.724277061527498374995.png',
+            iconSize: [38, 95],
+            popupAnchor: [0, -15]
+        });
+
+        var YellowMarker = L.icon({
+            iconUrl: 'https://png2.cleanpng.com/sh/7c72eb604f011ff2908766276c532166/L0KzQYm3V8A1N6t3jpH0aYP2gLBuTfdwd5hxfZ92YYD2PbT2jgB2fJZ3Rdtsb372Pbn2lL1xcZYyiNtFenGwebBtjCJuaaVuRadrM3SzdIK8WMU4aWY3RqgCOEm1R4K5UcU0OGg3T6k5MUW3Roi1kP5o/kisspng-google-maps-computer-icons-hot-pie-pizza-informati-5b3d0d15857a52.6789271215307277015467.png',
+            iconSize: [38, 95],
+            popupAnchor: [0, -15]
+        });
+
+        var BlueMarker = L.icon({
+            iconUrl: 'https://cdn1.iconfinder.com/data/icons/social-messaging-ui-color/254000/66-512.png',
+            iconSize: [40, 97],
+            popupAnchor: [0, -15]
+        });
+
+        for (var i = 0; i < plano.length; i++) {
+            console.log(parseInt(datos[i].precionum))
+            if (parseInt(datos[i].precionum) > 400) {
+                mark = RedMarker;
+            }
+            else if (parseInt(datos[i].precionum) <= 400 && parseInt(datos[i].precionum) > 150) {
+                mark = YellowMarker;
+            }
+            else {
+                mark = BlueMarker;
+            }
+
+            marker = new L.marker([plano[i][1], plano[i][2]])//por defecto
+                .bindPopup(plano[i][0])
+                .addTo(map);
+
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+</body>
+
+</html>
