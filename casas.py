@@ -34,8 +34,6 @@ def casas():
                 print("$",primer_precioMod)
 
             descripcion = primera_casa.select("div.desc a")[0].get_text() #selecciona todas las "a" que tengan la clase desc dentro del div
-            #print(descripcion)
-            #print(len(descripcion))
             url_publicacion = primera_casa.select("div.desc a")[0].get("href") #se saca el url de la publicacion
             imagen = primera_casa.select("figure.img img")[0].get("src") #url imagen
             #print(url_publicacion) #esta es la url de la pagina
