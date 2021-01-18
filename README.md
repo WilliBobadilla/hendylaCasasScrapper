@@ -11,3 +11,43 @@ Modificacion de un proyecto que habia realizado para un curso avanzado de web sc
 - Detalles de cada publicacion(mas de lo detallado que tiene cada pop-up)
 - filtro por rango de precio
 - interfaz mas linda
+- Jugar con hilos para que al scrapear muestre en la interfaz algun mensaje de carga en segundo plano
+
+# Como correr el proyecto :computer:
+
+<p>1. Clonar la repo</p>
+
+```bash
+git clone https://github.com/WilliBobadilla/hendylaCasasScrapper.git
+```
+
+<p>2. Moverte al directorio de la repo</p>
+
+```bash
+cd  hendylaCasasScrapper
+```
+
+<p>3. Crear el virtualenv</p>
+
+```bash
+virtualenv env
+```
+
+<p>4. Activar el virtual env</p> 
+** Para linux
+
+```bash
+source env/bin/activate
+```
+
+<p>5. Instalar dependencias</p>
+
+```bash
+pip install -r requirements.txt
+```
+
+<p>6. Correr el proyecto </p>
+
+```bash
+python app.py
+```
