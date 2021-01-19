@@ -20,7 +20,7 @@ def casas():
     soup = BeautifulSoup(page.content,"html.parser")
     casas = soup.find_all("article", class_ ="product-item clasificado") #lista casas
     lista_datos = [] #el diccionario con todos los datos
-    for indice in range(len(casas)): #recorriendo
+    for indice in range(3): #recorriendo (3 para pruebas)
         try:
             primera_casa = casas[indice] 
             primer_precio = primera_casa.find_all("div", class_ ="precio left")[0].p.get_text() #se saca los datos del string que no interesan
