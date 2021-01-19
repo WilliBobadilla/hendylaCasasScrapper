@@ -40,14 +40,12 @@ def casas():
                 primer_precio = "$"+primer_precioMod  # si esta en uss
                 print("$", primer_precioMod)
 
-
-<< << << < HEAD
             # selecciona todas las "a" que tengan la clase desc dentro del div
             descripcion = primera_casa.select("div.desc a")[0].get_text()
             url_publicacion = primera_casa.select("div.desc a")[0].get(
                 "href")  # se saca el url de la publicacion
             imagen = primera_casa.select("figure.img img")[
-                                         0].get("src")  # url imagen
+                0].get("src")  # url imagen
             # print(url_publicacion) #esta es la url de la pagina
             # sacar la latitud y longitud
             # se "entra" a la ulr de la publicacion para scrapear datos que no se tienen en la pag inicial
@@ -57,7 +55,7 @@ def casas():
             coord = coord[0].find("iframe").get("src")  # del link
             # se halla de donde a donde se va a recortar el string
             index_primero = coord.find("=")
-== == == =
+
             # selecciona todas las "a" que tengan la clase desc dentro del div
             descripcion = primera_casa.select("div.desc a")[0].get_text()
             # print(descripcion)
@@ -75,7 +73,6 @@ def casas():
             coord = coord[0].find("iframe").get("src")  # del link
             # se halla de donde a donde se va a recortar el string
             index_primero = coord.find("=")
->>>>>> > dev_willi
             index_final = coord.find("&")
             coord = coord[index_primero+1:index_final-1]
             # print(coord)
