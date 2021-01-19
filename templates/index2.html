@@ -46,7 +46,8 @@
         for (index = 0; index < datos.length; index++) {
             //console.log(index);  
             // console.log(lista_aux);
-            lista_aux = ["<h1>" + datos[index].descripcion + "</h1>" + "<h2>" + "Precio:" + datos[index].precio + "</h2>", datos[index].ubicacion.latitud, datos[index].ubicacion.longitud];
+            var imagen = "<img  width='80%' height='80%' src=' " + datos[index].img + "'>"
+            lista_aux = ["<h1>" + datos[index].descripcion + "</h1>" + "<h2>" + "Precio:" + datos[index].precio + "</h2>" + imagen, datos[index].ubicacion.latitud, datos[index].ubicacion.longitud];
             plano.push(lista_aux);// agregamos al array
         }
         console.log(plano);
