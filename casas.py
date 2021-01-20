@@ -35,10 +35,12 @@ def casas():
             if primer_precioMod.find("nta") == -1:
                 primer_precio = "Gs."+primer_precioMod
                 print("Gs.", primer_precioMod)  # si esta en guaranies
+
             else:
                 primer_precioMod = primer_precio[primer_precio.find("$")+2:]
                 primer_precio = "$"+primer_precioMod  # si esta en uss
                 print("$", primer_precioMod)
+
 
             # selecciona todas las "a" que tengan la clase desc dentro del div
             descripcion = primera_casa.select("div.desc a")[0].get_text()
@@ -55,7 +57,6 @@ def casas():
             coord = coord[0].find("iframe").get("src")  # del link
             # se halla de donde a donde se va a recortar el string
             index_primero = coord.find("=")
-
             # selecciona todas las "a" que tengan la clase desc dentro del div
             descripcion = primera_casa.select("div.desc a")[0].get_text()
             # print(descripcion)
@@ -69,6 +70,17 @@ def casas():
             # se "entra" a la ulr de la publicacion para scrapear datos que no se tienen en la pag inicial
             pagina2 = requests.get(url_publicacion)
             soup2 = BeautifulSoup(pagina2.content, "html.parser")
+
+            content_info = soup2.find_all("div", class_="row-description-container")
+            detalles_content = content_info[0].find_all("ul", class_="cuadro-detalles")[0]
+            detalles = detalles_content.find_all("p")
+            detalles_dic={} #Se agrega un diccionario vacío para meter los datos
+            for i in detalles:
+                String_span = i.span.text 
+                final = i.text.replace(String_span, "") 
+                detalles_dic[String_span]=final #Se agregan los datos, la información del span como clave y el texto de los tag "p" como valor
+
+            info = content_info[0].find("p").text #Se saca la info inicial de la casa
             coord = soup2.find_all("div", id="map")  # se saca coordenadas
             coord = coord[0].find("iframe").get("src")  # del link
             # se halla de donde a donde se va a recortar el string
@@ -78,7 +90,12 @@ def casas():
             # print(coord)
             # se separa la latitud y la longitud
             latitud, longitud = separador(coord)
+
+            #-------------------------------------------
+
             datos = {  # el diccionario a usar
+                "informacion" : info,
+                "detalles" : detalles_dic,
                 "url": url_publicacion,
                 "precio": primer_precio,
                 "precionum": primer_precioMod,
@@ -98,3 +115,7 @@ def casas():
 
     # print("Cantidad recolectada: ",len(lista_datos))
     return lista_datos  # cuando se llama a la funcion retorna la lista
+
+
+# if __name__ == "__main__": #Si el script está en el módulo principal se ejecuta, si el script es importado no
+#     casas()
